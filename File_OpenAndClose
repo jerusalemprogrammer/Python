@@ -60,7 +60,7 @@ headers = ['Item_ID',\
     'Item_Sold2WhichClient',\
     'Item_SalePrice']
 
-## TEST OUTPUT
+## TEST INPUTTED DATA
 print('\n')
 print('FIRST ITEM IN INVENTORY = ',ListInventoryItems[0], type(ListInventoryItems), len(ListInventoryItems))
 print('\n')
