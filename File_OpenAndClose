@@ -1,0 +1,92 @@
+## IMPORT MODULES
+## IMPORT MODULES
+## IMPORT MODULES
+
+import math
+import csv
+import mod_Calculation_ExtractDictionaryItems
+
+
+## BEGIN MAIN PROGRAM
+## BEGIN MAIN PROGRAM
+## BEGIN MAIN PROGRAM
+
+## CREATE EMPTY LIST TO BE USED AS LIST OF DICTIONARY OBJECTS
+ListOfDictionaries = list()
+
+## THIS OPENS CSV FILE AS PYTHON DICTIONARY OBJECT ~= JSON OBJECT
+with open('INVENTORY_GLASS.csv') as f:
+
+    ## READ CSV DATA INTO PYTHON DICTIONARY OBJECT ~= JSON OBJECT
+    f_csv = csv.DictReader(f, delimiter=';')
+
+    ## SET COUNTER VARIABLE TO 0 (ZERO)
+    count = 0
+    
+    ## BEGIN FOR-LOOP TO READ DATA FROM CSV FILE
+    for row in f_csv:
+
+        ## <class 'dict'> OBJECT, COUNT KEY/VALUE (= ITEMS) IN EACH DICTIONARY OBJECT
+        print('\n')
+        print(row,type(row),len(row))
+
+        ## INCREMENT COUNTER FOR EACH ROW IN CSV FILE
+        count = count + 1
+
+        ## ADDS DICTIONARY OBJECT "ROW" AS LIST ITEM TO LIST, i.e. LIST OF DICTIONARIES
+        ListOfDictionaries.append(row)
+
+    ## END FOR-LOOP TO READ DATA FROM CSV FILE
+
+
+## CALL FUNCTION - pass Inventory LIST of DICTIONARY OBJECTS to extract the VALUES; ignores KEYS temporarily for back-end processing
+## RETURNS LIST OF TUPLES OF ITEMS (i.e. ITEM DATA)
+ListInventoryItems = mod_Calculation_ExtractDictionaryItems.fn_Calculation_ExtractDictionaryItems(ListOfDictionaries)
+print('\n')
+print("ListInventoryItems = ",type(ListInventoryItems),len(ListInventoryItems))
+        
+
+headers = ['Item_ID',\
+    'Item_Title',\
+    'Item_Description',\
+    'Item_DateAncient',\
+    'Item_Type',\
+    'Item_SizeHxW',\
+    'Item_Condition',\
+    'Item_Reference',\
+    'Item_Provenance',\
+    'Item_MannerOfAcquisition',\
+    'Item_DateSold2Client',\
+    'Item_Sold2WhichClient',\
+    'Item_SalePrice']
+
+## TEST OUTPUT
+print('\n')
+print('FIRST ITEM IN INVENTORY = ',ListInventoryItems[0], type(ListInventoryItems), len(ListInventoryItems))
+print('\n')
+print('SECOND ITEM IN INVENTORY = ',ListInventoryItems[1], type(ListInventoryItems), len(ListInventoryItems))
+print('\n')
+print("NUMBER OF ITEMS IN INVENTORY = ",count)
+
+
+## BEGIN PROCESS DATA THAT IS INPUTTED, DO CALCULATIONS...
+## END PROCESS DATA THAT IS INPUTTED, DO CALCULATIONS...
+
+## CREATE EMPTY LIST
+rows = list()
+
+## BEGIN FOR-LOOP TO LOOP THROUGH INVENTORY ITEMS TO PREPARE FOR OUTPUT
+for i in ListInventoryItems:
+    rows.append(i)
+
+#### OPENS CSV FILE AND OUTPUTS + SAVES DATA TO CSV FILE IN CSV FORMAT
+with open('OUTPUT_GLASS.csv','w', newline='') as f:
+    f_csv = csv.writer(f, delimiter=';')
+    f_csv.writerow(headers)
+    f_csv.writerows(rows)
+
+
+
+
+        
+
